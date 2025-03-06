@@ -1,0 +1,47 @@
+﻿@model List<IDZ_WEB.Models.Payment>
+
+@{
+    ViewBag.Title = "Платежи";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Платежи для бронирования @ViewBag.BookingID</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Внести платеж", "AddPayment", "Home", new { bookingID = ViewBag.BookingID }, new { @class = "btn btn-primary mb-3" })
+    }
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Сумма</th>
+                <th class="text-center">Дата</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th class="text-center">Редактировать</th>
+                    <th class="text-center">Удалить</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr class="text-center">
+                    <td>@payment.PaymentID</td>
+                    <td>@payment.Payment1</td>
+                    <td>@payment.PaymentDate.ToString("dd.MM.yyyy")</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td><a href="@Url.Action("EditPayment", "Home", new { paymentID = payment.PaymentID })" class="btn btn-warning">Редактировать</a></td>
+                        <td><a href="@Url.Action("DeletePayment", "Home", new { paymentID = payment.PaymentID })" class="btn btn-danger">Удалить</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-secondary" href="@Url.Action("Bookings", "Home")">Назад</a>
+    </div>
+</div>

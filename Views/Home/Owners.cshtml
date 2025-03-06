@@ -1,0 +1,45 @@
+﻿@model List<IDZ_WEB.Models.Owner>
+
+@{
+    ViewBag.Title = "Хозяева животных";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Хозяева животных</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Добавить клиента", "CreateOwner", "Home", new { @class = "btn btn-primary mb-3" })
+    }
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">ФИО</th>
+                <th class="text-center">Номер телефона</th>
+                <th class="text-center">Животные</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th class="text-center">Редактировать</th>
+                    <th class="text-center">Удалить</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var owner in Model)
+            {
+                <tr class="text-center">
+                    <td>@owner.OwnerID</td>
+                    <td>@owner.LastName @owner.FirstName</td>
+                    <td>@owner.PhoneNumber</td>
+                    <td><a href="@Url.Action("Pets", "Home", new { ownerID = owner.OwnerID })" class="btn btn-info">Животные</a></td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td><a href="@Url.Action("EditOwner", "Home", new { ownerID = owner.OwnerID })" class="btn btn-warning">Редактировать</a></td>
+                        <td><a href="@Url.Action("DeleteOwner", "Home", new { ownerID = owner.OwnerID })" class="btn btn-danger">Удалить</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

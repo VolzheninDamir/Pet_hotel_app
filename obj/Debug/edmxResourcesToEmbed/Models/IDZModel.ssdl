@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище IDZModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PetID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CheckInDate" Type="date" Nullable="false" />
+    <Property Name="CheckOutDate" Type="date" Nullable="false" />
+    <Property Name="RoomID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Debt" Type="int" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Owners">
+    <Key>
+      <PropertyRef Name="OwnerID" />
+    </Key>
+    <Property Name="OwnerID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BookingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Payment" Type="int" Nullable="false" />
+    <Property Name="PaymentDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pets">
+    <Key>
+      <PropertyRef Name="PetID" />
+    </Key>
+    <Property Name="PetID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OwnerID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Species" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Breed" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="RoleCode" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rooms">
+    <Key>
+      <PropertyRef Name="RoomID" />
+    </Key>
+    <Property Name="RoomID" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserRole" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "IDZ.dbo.Booking" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+      <PropertyRef Name="Имя_хозяина" />
+      <PropertyRef Name="Фамилия_хозяина" />
+      <PropertyRef Name="Кличка" />
+      <PropertyRef Name="Дата_заселения" />
+      <PropertyRef Name="Дата_выселения" />
+      <PropertyRef Name="Номер_комнаты" />
+      <PropertyRef Name="Стоимость_проживания" />
+      <PropertyRef Name="Долг" />
+    </Key>
+    <Property Name="BookingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Имя_хозяина" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Фамилия_хозяина" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Кличка" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Дата_заселения" Type="date" Nullable="false" />
+    <Property Name="Дата_выселения" Type="date" Nullable="false" />
+    <Property Name="Номер_комнаты" Type="int" Nullable="false" />
+    <Property Name="Стоимость_проживания" Type="int" Nullable="false" />
+    <Property Name="Долг" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Bookings_Pets">
+    <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pets">
+        <PropertyRef Name="PetID" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="PetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bookings_Rooms">
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="RoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payments_Bookings">
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
+    <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bookings">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pets_Owners">
+    <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+    <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owners">
+        <PropertyRef Name="OwnerID" />
+      </Principal>
+      <Dependent Role="Pets">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleCode" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CreateBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OwnerFirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="OwnerLastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="PetName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CheckinDate" Type="date" Mode="In" />
+    <Parameter Name="CheckoutDate" Type="date" Mode="In" />
+    <Parameter Name="RoomID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище IDZModelContainer">
+    <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Booking].[BookingID] AS [BookingID], 
+    [Booking].[Имя_хозяина] AS [Имя_хозяина], 
+    [Booking].[Фамилия_хозяина] AS [Фамилия_хозяина], 
+    [Booking].[Кличка] AS [Кличка], 
+    [Booking].[Дата_заселения] AS [Дата_заселения], 
+    [Booking].[Дата_выселения] AS [Дата_выселения], 
+    [Booking].[Номер_комнаты] AS [Номер_комнаты], 
+    [Booking].[Стоимость_проживания] AS [Стоимость_проживания], 
+    [Booking].[Долг] AS [Долг]
+    FROM [dbo].[Booking] AS [Booking]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Bookings_Pets" Association="Self.FK_Bookings_Pets">
+      <End Role="Pets" EntitySet="Pets" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bookings_Rooms" Association="Self.FK_Bookings_Rooms">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payments_Bookings" Association="Self.FK_Payments_Bookings">
+      <End Role="Bookings" EntitySet="Bookings" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pets_Owners" Association="Self.FK_Pets_Owners">
+      <End Role="Owners" EntitySet="Owners" />
+      <End Role="Pets" EntitySet="Pets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

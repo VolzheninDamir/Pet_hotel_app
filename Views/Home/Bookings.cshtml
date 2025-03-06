@@ -1,0 +1,89 @@
+﻿@model List<IDZ_WEB.Models.Booking1>
+
+@{
+    ViewBag.Title = "Бронирования";
+
+    var ownerFirstNamesList = new List<SelectListItem>
+{
+        new SelectListItem { Value = "", Text = "Выберите имя" }
+    };
+    ownerFirstNamesList.AddRange(((IEnumerable<string>)ViewBag.OwnerFirstNames).Select(name => new SelectListItem { Value = name, Text = name, Selected = name == ViewBag.SelectedOwnerFirstName }));
+
+    var ownerLastNamesList = new List<SelectListItem>
+{
+        new SelectListItem { Value = "", Text = "Выберите фамилию" }
+    };
+    ownerLastNamesList.AddRange(((IEnumerable<string>)ViewBag.OwnerLastNames).Select(name => new SelectListItem { Value = name, Text = name, Selected = name == ViewBag.SelectedOwnerLastName }));
+
+    var petNamesList = new List<SelectListItem>
+{
+        new SelectListItem { Value = "", Text = "Выберите кличку" }
+    };
+    petNamesList.AddRange(((IEnumerable<string>)ViewBag.PetNames).Select(name => new SelectListItem { Value = name, Text = name, Selected = name == ViewBag.SelectedPetName }));
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Бронирования</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Создать бронирование", "CreateBooking", "Home", new { @class = "btn btn-primary" })
+        }
+
+        <!-- Форма для фильтрации -->
+        @using (Html.BeginForm("Bookings", "Home", FormMethod.Get, new { @class = "d-flex" }))
+        {
+            <div class="form-group mx-2">
+                @Html.Label("ownerFirstName", "Имя хозяина", new { @class = "sr-only" })
+                @Html.DropDownList("ownerFirstName", ownerFirstNamesList, new { @class = "form-control", @onchange = "this.form.submit();" })
+            </div>
+            <div class="form-group mx-2">
+                @Html.Label("ownerLastName", "Фамилия хозяина", new { @class = "sr-only" })
+                @Html.DropDownList("ownerLastName", ownerLastNamesList, new { @class = "form-control", @onchange = "this.form.submit();" })
+            </div>
+            <div class="form-group mx-2">
+                @Html.Label("petName", "Кличка", new { @class = "sr-only" })
+                @Html.DropDownList("petName", petNamesList, new { @class = "form-control", @onchange = "this.form.submit();" })
+            </div>
+        }
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Имя и Фамилия хозяина</th>
+                <th class="text-center">Кличка</th>
+                <th class="text-center">Дата заселения</th>
+                <th class="text-center">Дата выселения</th>
+                <th class="text-center">Номер комнаты</th>
+                <th class="text-center">Стоимость проживания</th>
+                <th class="text-center">Долг</th>
+                <th class="text-center">Платежи</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th class="text-center">Удалить</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr class="text-center">
+                    <td>@booking.Фамилия_хозяина @booking.Имя_хозяина</td>
+                    <td>@booking.Кличка</td>
+                    <td>@booking.Дата_заселения.ToString("dd.MM.yyyy")</td>
+                    <td>@booking.Дата_выселения.ToString("dd.MM.yyyy")</td>
+                    <td>@booking.Номер_комнаты</td>
+                    <td>@booking.Стоимость_проживания</td>
+                    <td>@booking.Долг</td>
+                    <td><a href="@Url.Action("Payments", "Home", new { bookingID = booking.BookingID })" class="btn btn-info">Платежи</a></td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td><a href="@Url.Action("DeleteBooking", "Home", new { bookingID = booking.BookingID })" class="btn btn-danger">Удалить</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

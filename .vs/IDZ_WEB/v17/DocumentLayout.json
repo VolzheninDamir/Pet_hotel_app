@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A86F06B-0FA3-4F51-99B7-8501D9B5A390}|IDZ_WEB.csproj|c:\\users\\damir\\desktop\\\u043F\u0430\u043F\u043A\u0430\\visual studio\\web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\idz_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A86F06B-0FA3-4F51-99B7-8501D9B5A390}|IDZ_WEB.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A86F06B-0FA3-4F51-99B7-8501D9B5A390}|IDZ_WEB.csproj|C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\models\\idzmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "RelativeMoniker": "D:0:0:{7A86F06B-0FA3-4F51-99B7-8501D9B5A390}|IDZ_WEB.csproj|solutionrelative:models\\idzmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T16:05:12.365Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IDZModel.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\Models\\IDZModel.edmx",
+              "RelativeDocumentMoniker": "Models\\IDZModel.edmx",
+              "ToolTip": "C:\\Users\\Damir\\Desktop\\\u043F\u0430\u043F\u043A\u0430\\Visual Studio\\Web-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\\IDZ_WEB\\Models\\IDZModel.edmx [Diagram1]",
+              "RelativeToolTip": "Models\\IDZModel.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2024-12-17T06:07:42.482Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

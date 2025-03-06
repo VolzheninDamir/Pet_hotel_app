@@ -1,0 +1,45 @@
+﻿@model IDZ_WEB.Models.Payment
+
+@{
+    ViewBag.Title = "Редактировать платеж";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Редактировать платеж</h2>
+
+    @using (Html.BeginForm("EditPayment", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Payment1, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Payment1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Payment1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.PaymentDate, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.BookingID)
+            @Html.HiddenFor(model => model.PaymentID)
+
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Назад к списку платежей", "Payments", new { bookingID = Model.BookingID }, new { @class = "btn btn-secondary" })
+    </div>
+</div>

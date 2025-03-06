@@ -1,0 +1,49 @@
+﻿@model List<IDZ_WEB.Models.Pet>
+
+@{
+    ViewBag.Title = "Животные владельца";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Животные владельца</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Добавить животного", "CreatePet", "Home", new { ownerID = ViewBag.OwnerID }, new { @class = "btn btn-primary mb-3" })
+    }
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Кличка</th>
+                <th class="text-center">Вид</th>
+                <th class="text-center">Порода</th>
+                <th class="text-center">Бронирования</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th class="text-center">Удалить</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pet in Model)
+            {
+                <tr class="text-center">
+                    <td>@pet.PetID</td>
+                    <td>@pet.Name</td>
+                    <td>@pet.Species</td>
+                    <td>@pet.Breed</td>
+                    <td><a href="@Url.Action("Bookings", "Home", new { petName = pet.Name })" class="btn btn-info">Бронирования</a></td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td><a href="@Url.Action("DeletePet", "Home", new { petID = pet.PetID })" class="btn btn-danger">Удалить</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-secondary" href="@Url.Action("Owners", "Home")">Назад</a>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model IDZ_WEB.Models.Payment
+
+@{
+    ViewBag.Title = "Удалить платеж";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Удалить платеж</h2>
+
+    <h3>Вы действительно хотите удалить этот платеж?</h3>
+    <div>
+        <h4>Платеж</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PaymentID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PaymentID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Payment1)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Payment1)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </dt>
+            <dd>
+                @Model.PaymentDate.ToString("dd.MM.yyyy")
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="paymentID" value="@Model.PaymentID" />
+            <input type="submit" value="Удалить" class="btn btn-danger" />
+        }
+        <a href="@Url.Action("Payments", new { bookingID = Model.BookingID })" class="btn btn-secondary">Отмена</a>
+    </div>
+</div>
