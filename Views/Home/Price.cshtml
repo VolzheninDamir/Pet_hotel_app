@@ -1,0 +1,28 @@
+﻿@model List<IDZ_WEB.Models.Room>
+
+@{
+    ViewBag.Title = "Цена за комнату";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">HELLO!:) Здесь вы можете ознакомится с ценами</h1>
+    <h2 class="mb-4">Цена за комнату</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">Номер комнаты</th>
+                <th class="text-center">Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model)
+            {
+                <tr class="text-center">
+                    <td>@room.RoomID</td>
+                    <td>@room.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

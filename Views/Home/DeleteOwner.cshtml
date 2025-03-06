@@ -1,0 +1,45 @@
+﻿@model IDZ_WEB.Models.Owner
+
+@{
+    ViewBag.Title = "DeleteOwner";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Удаление клиента</h2>
+
+    <h3>Вы уверены что хотите удалить клиента?</h3>
+    <div>
+        <h4>Owner</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm("DeleteOwner", "Home", new { OwnerID = Model.OwnerID }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a href="@Url.Action("Owners")" class="btn btn-secondary">Назад</a>
+            </div>
+        }
+    </div>
+</div>

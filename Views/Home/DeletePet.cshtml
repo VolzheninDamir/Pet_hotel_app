@@ -1,0 +1,49 @@
+﻿@model IDZ_WEB.Models.Pet
+
+@{
+    ViewBag.Title = "Удалить животное";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Удалить животное</h2>
+
+    <h3>Вы действительно хотите удалить это животное?</h3>
+    <div>
+        <h4>Животное</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PetID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PetID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Species)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Species)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Breed)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Breed)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="petID" value="@Model.PetID" />
+            <input type="submit" value="Удалить" class="btn btn-danger" />
+        }
+        <a href="@Url.Action("Pets", new { ownerID = Model.OwnerID })" class="btn btn-secondary">Отмена</a>
+    </div>
+</div>

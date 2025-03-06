@@ -1,0 +1,56 @@
+﻿@model IDZ_WEB.Models.Pet
+
+@{
+    ViewBag.Title = "CreatePet";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">CreatePet</h2>
+
+    @using (Html.BeginForm("CreatePet", "Home", FormMethod.Post, new { ownerID = ViewBag.OwnerID }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Pet</h4>
+            <hr />
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.OwnerID, new { Value = ViewBag.OwnerID })
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Species, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Species, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Species, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Breed, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Breed, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Breed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a class="btn btn-secondary" href="@Url.Action("Pets", "Home", new { ownerID = ViewBag.OwnerID })">Назад</a>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@model IDZ_WEB.Models.Booking1
+
+@{
+    ViewBag.Title = "Удалить бронирование";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Удалить бронирование</h2>
+
+    <h3>Вы действительно хотите удалить это бронирование?</h3>
+    <div>
+        <h4>Бронирование</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BookingID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookingID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Фамилия_хозяина)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Фамилия_хозяина)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Имя_хозяина)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Имя_хозяина)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Кличка)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Кличка)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Дата_заселения)
+            </dt>
+            <dd>
+                @Model.Дата_заселения.ToString("dd.MM.yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Дата_выселения)
+            </dt>
+            <dd>
+                @Model.Дата_выселения.ToString("dd.MM.yyyy")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Номер_комнаты)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Номер_комнаты)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Стоимость_проживания)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Стоимость_проживания)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Долг)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Долг)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="bookingID" value="@Model.BookingID" />
+            <input type="submit" value="Удалить" class="btn btn-danger" />
+        }
+        <a href="@Url.Action("Bookings")" class="btn btn-secondary">Отмена</a>
+    </div>
+</div>

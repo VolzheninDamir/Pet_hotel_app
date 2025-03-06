@@ -1,0 +1,89 @@
+﻿@model IDZ_WEB.Models.Booking1
+
+@{
+    ViewBag.Title = "Создать бронирование";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Создать бронирование</h2>
+
+    @using (Html.BeginForm("CreateBooking", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Booking</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.Label("OwnerFirstName", "Имя хозяина", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OwnerFirstName", new SelectList(ViewBag.OwnerFirstNames), "Выберите или введите имя", new { @class = "form-control", @data_toggle = "combobox" })
+                    @Html.TextBox("OwnerFirstName", null, new { @class = "form-control d-none", id = "OwnerFirstNameInput" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("OwnerLastName", "Фамилия хозяина", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OwnerLastName", new SelectList(ViewBag.OwnerLastNames), "Выберите или введите фамилию", new { @class = "form-control", @data_toggle = "combobox" })
+                    @Html.TextBox("OwnerLastName", null, new { @class = "form-control d-none", id = "OwnerLastNameInput" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("PetName", "Кличка", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PetName", new SelectList(ViewBag.PetNames), "Выберите или введите кличку", new { @class = "form-control", @data_toggle = "combobox" })
+                    @Html.TextBox("PetName", null, new { @class = "form-control d-none", id = "PetNameInput" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("CheckinDate", "Дата заезда", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.TextBox("CheckinDate", null, new { @class = "form-control", type = "date" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("CheckoutDate", "Дата выезда", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.TextBox("CheckoutDate", null, new { @class = "form-control", type = "date" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("RoomID", "Номер комнаты", htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.TextBox("RoomID", null, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <input type="submit" value="Создать" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Назад к списку", "Bookings", null, new { @class = "btn btn-secondary" })
+    </div>
+
+    <!-- Скрипты для переключения между выпадающими списками и текстовыми полями -->
+    <script>
+        $(document).ready(function () {
+            $("select[data_toggle='combobox']").change(function () {
+                var inputId = $(this).attr("id") + "Input";
+                if ($(this).val() === "") {
+                    $("#" + inputId).removeClass("d-none").val("");
+                } else {
+                    $("#" + inputId).addClass("d-none").val($(this).val());
+                }
+            }).trigger("change");
+        });
+    </script>
+</div>
